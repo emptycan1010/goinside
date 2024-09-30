@@ -33,7 +33,7 @@ func Guest(id, pw string) (gs *GuestSession, err error) {
 		pw:   pw,
 		conn: &Connection{timeout: time.Second * 5},
 	}
-	valueToken, appID, err := fetchAppID(gs)
+	valueToken, appID, err := FetchAppID(gs)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ func RandomGuest() *GuestSession {
 		pw:   fmt.Sprint(rand.Intn(100)),
 		conn: &Connection{timeout: time.Second * 5},
 	}
-	valueToken, appID, _ := fetchAppID(gs)
+	valueToken, appID, _ := FetchAppID(gs)
 	gs.app = &App{Token: valueToken, ID: appID}
 	return gs
 }
@@ -135,14 +135,14 @@ func (gs *GuestSession) actionForm(id, n string) (io.Reader, string) {
 }
 
 func (gs *GuestSession) getAppID() string {
-	valueToken, err := generateValueToken()
+	valueToken, err := GenerateValueToken()
 	if err != nil {
 		return ""
 	}
 	if gs.app.Token == valueToken {
 		return gs.app.ID
 	}
-	valueToken, appID, err := fetchAppID(gs)
+	valueToken, appID, err := FetchAppID(gs)
 	if err != nil {
 		return ""
 	}

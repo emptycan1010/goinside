@@ -21,8 +21,8 @@ type AppIDResponse []struct {
 	Cause  string `json:"cause"`
 }
 
-func fetchAppID(s session) (valueToken, appID string, err error) {
-	valueToken, err = generateValueToken()
+func FetchAppID(s session) (valueToken, appID string, err error) {
+	valueToken, err = GenerateValueToken()
 	if err != nil {
 		return "", "", err
 	}
@@ -51,7 +51,7 @@ func fetchAppID(s session) (valueToken, appID string, err error) {
 	return
 }
 
-func generateValueToken() (string, error) {
+func GenerateValueToken() (string, error) {
 	resp, err := appCheckAPI.getWithoutHash()
 	if err != nil {
 		return "", fmt.Errorf("appCheckAPI.getWithoutHash fail: %v", err)
