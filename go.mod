@@ -1,4 +1,4 @@
-module github.com/geeksbaek/goinside
+module github.com/emptycan1010/goinside
 
 go 1.13
 
